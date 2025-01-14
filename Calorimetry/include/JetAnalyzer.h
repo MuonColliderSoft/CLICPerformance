@@ -78,6 +78,45 @@ protected:
   float m_d2_mcPz=0;
   //particle level information sums --> visible and invisible energy
 
+//#######NEW#####################
+  int m_H1_mcPDGID = 0;
+  float m_H1_mcE   = 0;
+  float m_H1_mcPx  = 0;
+  float m_H1_mcPy  = 0;
+  float m_H1_mcPz  = 0;
+
+  int m_H2_mcPDGID = 0;
+  float m_H2_mcE   = 0;
+  float m_H2_mcPx  = 0;
+  float m_H2_mcPy  = 0;
+  float m_H2_mcPz  = 0;
+
+  int m_b1_mcPDGID = 0;
+  float m_b1_mcE   = 0;
+  float m_b1_mcPx  = 0;
+  float m_b1_mcPy  = 0;
+  float m_b1_mcPz  = 0;
+
+  int m_b2_mcPDGID = 0;
+  float m_b2_mcE   = 0;
+  float m_b2_mcPx  = 0;
+  float m_b2_mcPy  = 0;
+  float m_b2_mcPz  = 0;
+
+  int m_b3_mcPDGID = 0;
+  float m_b3_mcE   = 0;
+  float m_b3_mcPx  = 0;
+  float m_b3_mcPy  = 0;
+  float m_b3_mcPz  = 0;
+
+  int m_b4_mcPDGID = 0;
+  float m_b4_mcE   = 0;
+  float m_b4_mcPx  = 0;
+  float m_b4_mcPy  = 0;
+  float m_b4_mcPz  = 0;
+
+//#######ENDNEW#####################
+
   //only neutrinos
   float m_E_trueInv=0;
   float m_px_trueInv=0;

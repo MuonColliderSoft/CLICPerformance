@@ -129,6 +129,48 @@ void JetAnalyzer::init() {
   m_d2_mcPy  = 0;
   m_d2_mcPz  = 0;
 
+
+//#######NEW#####################
+  m_H1_mcPDGID = 0;
+  m_H1_mcE   = 0;
+  m_H1_mcPx  = 0;
+  m_H1_mcPy  = 0;
+  m_H1_mcPz  = 0;
+
+  m_H2_mcPDGID = 0;
+  m_H2_mcE   = 0;
+  m_H2_mcPx  = 0;
+  m_H2_mcPy  = 0;
+  m_H2_mcPz  = 0;
+
+
+  m_b1_mcPDGID = 0;
+  m_b1_mcE   = 0;
+  m_b1_mcPx  = 0;
+  m_b1_mcPy  = 0;
+  m_b1_mcPz  = 0;
+
+  m_b2_mcPDGID = 0;
+  m_b2_mcE   = 0;
+  m_b2_mcPx  = 0;
+  m_b2_mcPy  = 0;
+  m_b2_mcPz  = 0;
+
+
+  m_b3_mcPDGID = 0;
+  m_b3_mcE   = 0;
+  m_b3_mcPx  = 0;
+  m_b3_mcPy  = 0;
+  m_b3_mcPz  = 0;
+
+  m_b4_mcPDGID = 0;
+  m_b4_mcE   = 0;
+  m_b4_mcPx  = 0;
+  m_b4_mcPy  = 0;
+  m_b4_mcPz  = 0;
+
+//#######ENDNEW#####################
+
   m_genJet_E ->clear(); 
   m_genJet_Px ->clear(); 
   m_genJet_Py ->clear(); 
@@ -166,6 +208,46 @@ void JetAnalyzer::init() {
   m_outputTree->Branch("d2_mcPx",&m_d2_mcPx,"d2_mcPx/F");
   m_outputTree->Branch("d2_mcPy",&m_d2_mcPy,"d2_mcPy/F");
   m_outputTree->Branch("d2_mcPz",&m_d2_mcPz,"d2_mcPz/F");
+
+  //########################NEW
+  m_outputTree->Branch("H1_mcPDGID",&m_H1_mcPDGID,"H1_mcPDGID/I");
+  m_outputTree->Branch("H1_mcE",&m_H1_mcE,"H1_mcE/F");
+  m_outputTree->Branch("H1_mcPx",&m_H1_mcPx,"H1_mcPx/F");
+  m_outputTree->Branch("H1_mcPy",&m_H1_mcPy,"H1_mcPy/F");
+  m_outputTree->Branch("H1_mcPz",&m_H1_mcPz,"H1_mcPz/F");
+
+  m_outputTree->Branch("H2_mcPDGID",&m_H2_mcPDGID,"H2_mcPDGID/I");
+  m_outputTree->Branch("H2_mcE",&m_H2_mcE,"H2_mcE/F");
+  m_outputTree->Branch("H2_mcPx",&m_H2_mcPx,"H2_mcPx/F");
+  m_outputTree->Branch("H2_mcPy",&m_H2_mcPy,"H2_mcPy/F");
+  m_outputTree->Branch("H2_mcPz",&m_H2_mcPz,"H2_mcPz/F");
+
+  m_outputTree->Branch("b1_mcPDGID",&m_b1_mcPDGID,"b1_mcPDGID/I");
+  m_outputTree->Branch("b1_mcE",&m_b1_mcE,"b1_mcE/F");
+  m_outputTree->Branch("b1_mcPx",&m_b1_mcPx,"b1_mcPx/F");
+  m_outputTree->Branch("b1_mcPy",&m_b1_mcPy,"b1_mcPy/F");
+  m_outputTree->Branch("b1_mcPz",&m_b1_mcPz,"b1_mcPz/F");
+
+  m_outputTree->Branch("b2_mcPDGID",&m_b2_mcPDGID,"b2_mcPDGID/I");
+  m_outputTree->Branch("b2_mcE",&m_b2_mcE,"b2_mcE/F");
+  m_outputTree->Branch("b2_mcPx",&m_b2_mcPx,"b2_mcPx/F");
+  m_outputTree->Branch("b2_mcPy",&m_b2_mcPy,"b2_mcPy/F");
+  m_outputTree->Branch("b2_mcPz",&m_b2_mcPz,"b2_mcPz/F");
+
+  m_outputTree->Branch("b3_mcPDGID",&m_b3_mcPDGID,"b3_mcPDGID/I");
+  m_outputTree->Branch("b3_mcE",&m_b3_mcE,"b3_mcE/F");
+  m_outputTree->Branch("b3_mcPx",&m_b3_mcPx,"b3_mcPx/F");
+  m_outputTree->Branch("b3_mcPy",&m_b3_mcPy,"b3_mcPy/F");
+  m_outputTree->Branch("b3_mcPz",&m_b3_mcPz,"b3_mcPz/F");
+
+  m_outputTree->Branch("b4_mcPDGID",&m_b4_mcPDGID,"b4_mcPDGID/I");
+  m_outputTree->Branch("b4_mcE",&m_b4_mcE,"b4_mcE/F");
+  m_outputTree->Branch("b4_mcPx",&m_b4_mcPx,"b4_mcPx/F");
+  m_outputTree->Branch("b4_mcPy",&m_b4_mcPy,"b4_mcPy/F");
+  m_outputTree->Branch("b4_mcPz",&m_b4_mcPz,"b4_mcPz/F");
+
+//###############################ENDNEW
+
 
   //true particle level, exclude neutrinos, true visible content
   m_outputTree->Branch("E_trueVis" ,&m_E_trueVis, "E_trueVis/F");
@@ -206,6 +288,9 @@ void JetAnalyzer::processRunHeader( LCRunHeader*) {
 
 void JetAnalyzer::processEvent( LCEvent* evt ) {
 
+  streamlog_out( MESSAGE )<<"!!! NEW VERION !!!" << std::endl;
+
+
   m_eventNumber=evt->getEventNumber();
   m_runNumber=evt->getRunNumber();
 
@@ -236,6 +321,47 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
   m_d2_mcPy=-10;
   m_d2_mcPz=-10;
 
+//#######NEW#####################
+  m_H1_mcPDGID = -10;
+  m_H1_mcE   = -10;
+  m_H1_mcPx  = -10;
+  m_H1_mcPy  = -10;
+  m_H1_mcPz  = -10;
+
+  m_H2_mcPDGID = -10;
+  m_H2_mcE   = -10;
+  m_H2_mcPx  = -10;
+  m_H2_mcPy  = -10;
+  m_H2_mcPz  = -10;
+
+
+  m_b1_mcPDGID = -10;
+  m_b1_mcE   = -10;
+  m_b1_mcPx  = -10;
+  m_b1_mcPy  = -10;
+  m_b1_mcPz  = -10;
+
+  m_b2_mcPDGID = -10;
+  m_b2_mcE   = -10;
+  m_b2_mcPx  = -10;
+  m_b2_mcPy  = -10;
+  m_b2_mcPz  = -10;
+
+
+  m_b3_mcPDGID = -10;
+  m_b3_mcE   = -10;
+  m_b3_mcPx  = -10;
+  m_b3_mcPy  = -10;
+  m_b3_mcPz  = -10;
+
+  m_b4_mcPDGID = -10;
+  m_b4_mcE   = -10;
+  m_b4_mcPx  = -10;
+  m_b4_mcPy  = -10;
+  m_b4_mcPz  = -10;
+
+//#######ENDNEW#####################
+
   m_genJet_E ->clear(); 
   m_genJet_Px ->clear(); 
   m_genJet_Py ->clear(); 
@@ -264,6 +390,8 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
     if(mcColl!=NULL){
     int boson_counter=0;
     int ind_second_boson=-1;
+    MCParticle* index_H1=NULL; //NEW
+    MCParticle* index_H2=NULL;
     for(int m =0; m< mcColl->getNumberOfElements(); m++){
       MCParticle* mcp= dynamic_cast<MCParticle*>( mcColl->getElementAt(m) ) ;
       //boson checks have to be done for WW,WZ and ZZ configurations
@@ -316,6 +444,54 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
         m_d2_mcPy=mcp->getMomentum()[1];
         m_d2_mcPz=mcp->getMomentum()[2];
       }
+
+      if(mcp->getPDG()==25 && m_H1_mcE<0) {
+        index_H1=mcp; //metto variabile H1 uguale all'indice corrente
+        m_H1_mcPDGID=mcp->getPDG();
+        m_H1_mcE=mcp->getEnergy(); // m_H1_mcE non è più minore di 0, a m+1 anche se ho il secondo higgs, non entra in questo if e index_H1 resta pari a m
+        m_H1_mcPx=mcp->getMomentum()[0];
+        m_H1_mcPy=mcp->getMomentum()[1];
+        m_H1_mcPz=mcp->getMomentum()[2];
+      }
+      if(m_H2_mcE<0 && (mcp->getPDG()==25 && index_H1!=mcp )){ //se è passato per l'if precedente, l'm è cambiato
+        index_H2=mcp; //metto variabile H2 uguale all'indice corrente
+        m_H2_mcPDGID=mcp->getPDG();
+        m_H2_mcE=mcp->getEnergy();
+        m_H2_mcPx=mcp->getMomentum()[0];
+        m_H2_mcPy=mcp->getMomentum()[1];
+        m_H2_mcPz=mcp->getMomentum()[2];
+      }
+
+      if(abs(mcp->getPDG())==5 && m_b1_mcE<0 && mcp->getParents()[0]==index_H1) {
+        m_b1_mcPDGID=mcp->getPDG();
+        m_b1_mcE=mcp->getEnergy();
+        m_b1_mcPx=mcp->getMomentum()[0];
+        m_b1_mcPy=mcp->getMomentum()[1];
+        m_b1_mcPz=mcp->getMomentum()[2];
+      }
+      if(m_b2_mcE<0 && (abs(mcp->getPDG())==5 && mcp->getPDG()==(-m_b1_mcPDGID)) && mcp->getParents()[0]==index_H1 ){
+        m_b2_mcPDGID=mcp->getPDG();
+        m_b2_mcE=mcp->getEnergy();
+        m_b2_mcPx=mcp->getMomentum()[0];
+        m_b2_mcPy=mcp->getMomentum()[1];
+        m_b2_mcPz=mcp->getMomentum()[2];
+      }
+
+      if(abs(mcp->getPDG())==5 && m_b3_mcE<0 && mcp->getParents()[0]==index_H2) {
+        m_b3_mcPDGID=mcp->getPDG();
+        m_b3_mcE=mcp->getEnergy();
+        m_b3_mcPx=mcp->getMomentum()[0];
+        m_b3_mcPy=mcp->getMomentum()[1];
+        m_b3_mcPz=mcp->getMomentum()[2];
+      }
+      if(m_b4_mcE<0 && (abs(mcp->getPDG())==5 && mcp->getPDG()==(-m_b3_mcPDGID))&& mcp->getParents()[0]==index_H2){
+        m_b4_mcPDGID=mcp->getPDG();
+        m_b4_mcE=mcp->getEnergy();
+        m_b4_mcPx=mcp->getMomentum()[0];
+        m_b4_mcPy=mcp->getMomentum()[1];
+        m_b4_mcPz=mcp->getMomentum()[2];
+      }
+
       if(mcp->getGeneratorStatus()==1){//visible sum of stable particles --> take neutrinos out
         if(abs(mcp->getPDG())!=12 && abs(mcp->getPDG())!=14 && abs(mcp->getPDG())!=16){
           m_E_trueVis+=mcp->getEnergy();
