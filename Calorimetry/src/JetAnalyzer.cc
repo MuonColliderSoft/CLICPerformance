@@ -565,15 +565,16 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
           m_b4_mcPz=mcp->getMomentum()[2];
         }
       }
+
       if (m_processName == "bb") {
-        if(mcp->getPDG()==4 ) { //&& mcp->getGeneratorStatus()==23 
+        if(mcp->getPDG()==5 ) {
           m_b1_mcPDGID=mcp->getPDG();
           m_b1_mcE=mcp->getEnergy();
           m_b1_mcPx=mcp->getMomentum()[0];
           m_b1_mcPy=mcp->getMomentum()[1];
           m_b1_mcPz=mcp->getMomentum()[2];
         }
-        if(mcp->getPDG()==-4  ){ //&& mcp->getGeneratorStatus()==23
+        if(mcp->getPDG()==-5  ){
           m_b2_mcPDGID=mcp->getPDG();
           m_b2_mcE=mcp->getEnergy();
           m_b2_mcPx=mcp->getMomentum()[0];
@@ -582,7 +583,41 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
         }
       }
 
-//#######################SAVE bbbb FOR HH bkg####################
+      if (m_processName == "cc") {
+        if(mcp->getPDG()==4 ) {
+          m_b1_mcPDGID=mcp->getPDG();
+          m_b1_mcE=mcp->getEnergy();
+          m_b1_mcPx=mcp->getMomentum()[0];
+          m_b1_mcPy=mcp->getMomentum()[1];
+          m_b1_mcPz=mcp->getMomentum()[2];
+        }
+        if(mcp->getPDG()==-4  ){
+          m_b2_mcPDGID=mcp->getPDG();
+          m_b2_mcE=mcp->getEnergy();
+          m_b2_mcPx=mcp->getMomentum()[0];
+          m_b2_mcPy=mcp->getMomentum()[1];
+          m_b2_mcPz=mcp->getMomentum()[2];
+        }
+      }
+      
+      if (m_processName == "qq") {
+        if(abs(mcp->getPDG())==3 || abs(mcp->getPDG())==2 || abs(mcp->getPDG())==1) {
+          m_b1_mcPDGID=mcp->getPDG();
+          m_b1_mcE=mcp->getEnergy();
+          m_b1_mcPx=mcp->getMomentum()[0];
+          m_b1_mcPy=mcp->getMomentum()[1];
+          m_b1_mcPz=mcp->getMomentum()[2];
+        }
+        if(abs(mcp->getPDG())==3 || abs(mcp->getPDG())==2 || abs(mcp->getPDG())==1){
+          m_b2_mcPDGID=mcp->getPDG();
+          m_b2_mcE=mcp->getEnergy();
+          m_b2_mcPx=mcp->getMomentum()[0];
+          m_b2_mcPy=mcp->getMomentum()[1];
+          m_b2_mcPz=mcp->getMomentum()[2];
+        }
+      }
+
+
       if (m_processName == "bbbb") {
         if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000 ) {
           index_H1=mcp; 
@@ -788,7 +823,6 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
       }
     }
 
-//#######################SAVE qqqqlnu FOR HH bkg####################
     if (m_processName == "qqqqlnu") {
       if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) && m_b1_mcPDGID == -10) {
         index_b1=mcp;
