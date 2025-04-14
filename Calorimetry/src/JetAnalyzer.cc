@@ -134,8 +134,6 @@ void JetAnalyzer::init() {
   m_d2_mcPy  = 0;
   m_d2_mcPz  = 0;
 
-
-//#######NEW for HH#####################
   m_H1_mcPDGID = 0;
   m_H1_mcE   = 0;
   m_H1_mcPx  = 0;
@@ -147,7 +145,6 @@ void JetAnalyzer::init() {
   m_H2_mcPx  = 0;
   m_H2_mcPy  = 0;
   m_H2_mcPz  = 0;
-
 
   m_b1_mcPDGID = 0;
   m_b1_mcE   = 0;
@@ -161,7 +158,6 @@ void JetAnalyzer::init() {
   m_b2_mcPy  = 0;
   m_b2_mcPz  = 0;
 
-
   m_b3_mcPDGID = 0;
   m_b3_mcE   = 0;
   m_b3_mcPx  = 0;
@@ -173,7 +169,6 @@ void JetAnalyzer::init() {
   m_b4_mcPx  = 0;
   m_b4_mcPy  = 0;
   m_b4_mcPz  = 0;
-
 
   m_b5_mcPDGID = 0;
   m_b5_mcE   = 0;
@@ -187,24 +182,17 @@ void JetAnalyzer::init() {
   m_b6_mcPy  = 0;
   m_b6_mcPz  = 0;
 
+  m_b7_mcPDGID = 0;
+  m_b7_mcE   = 0;
+  m_b7_mcPx  = 0;
+  m_b7_mcPy  = 0;
+  m_b7_mcPz  = 0;
 
-
-//#######ENDNEW#####################
-
-//##########NEW FOR DIJET###########
-/* m_b1_mcPDGID = 0;
-  m_b1_mcE   = 0;
-  m_b1_mcPx  = 0;
-  m_b1_mcPy  = 0;
-  m_b1_mcPz  = 0;
-
-  m_b2_mcPDGID = 0;
-  m_b2_mcE   = 0;
-  m_b2_mcPx  = 0;
-  m_b2_mcPy  = 0;
-  m_b2_mcPz  = 0;
-*/
-
+  m_b8_mcPDGID = 0;
+  m_b8_mcE   = 0;
+  m_b8_mcPx  = 0;
+  m_b8_mcPy  = 0;
+  m_b8_mcPz  = 0;
 
 //#######################################
 /*  m_genJet_E ->clear(); 
@@ -530,204 +518,179 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
         m_d2_mcPy=mcp->getMomentum()[1];
         m_d2_mcPz=mcp->getMomentum()[2];
       }
-//#######################SAVE HH####################
-    //  if(mcp->getPDG()==25 && m_H1_mcE<0) {
-    //     index_H1=mcp; //metto variabile H1 uguale all'indice corrente
-    //     m_H1_mcPDGID=mcp->getPDG();
-    //     m_H1_mcE=mcp->getEnergy(); // m_H1_mcE non è più minore di 0, a m+1 anche se ho il secondo higgs, non entra in questo if e index_H1 resta pari a m
-    //     m_H1_mcPx=mcp->getMomentum()[0];
-    //     m_H1_mcPy=mcp->getMomentum()[1];
-    //     m_H1_mcPz=mcp->getMomentum()[2];
-    //   }
-    //   if(m_H2_mcE<0 && (mcp->getPDG()==25 && index_H1!=mcp )){ //se è passato per l'if precedente, l'm è cambiato
-    //     index_H2=mcp; //metto variabile H2 uguale all'indice corrente
-    //     m_H2_mcPDGID=mcp->getPDG();
-    //     m_H2_mcE=mcp->getEnergy();
-    //     m_H2_mcPx=mcp->getMomentum()[0];
-    //     m_H2_mcPy=mcp->getMomentum()[1];
-    //     m_H2_mcPz=mcp->getMomentum()[2];
-    //   }
 
-    //  if(abs(mcp->getPDG())==5 && m_b1_mcE<0 && mcp->getParents()[0]==index_H1) {
-    //     m_b1_mcPDGID=mcp->getPDG();
-    //     m_b1_mcE=mcp->getEnergy();
-    //     m_b1_mcPx=mcp->getMomentum()[0];
-    //     m_b1_mcPy=mcp->getMomentum()[1];
-    //     m_b1_mcPz=mcp->getMomentum()[2];
-    //   }
-    //   if(m_b2_mcE<0 && (abs(mcp->getPDG())==5 && mcp->getPDG()==(-m_b1_mcPDGID)) && mcp->getParents()[0]==index_H1 ){
-    //     m_b2_mcPDGID=mcp->getPDG();
-    //     m_b2_mcE=mcp->getEnergy();
-    //     m_b2_mcPx=mcp->getMomentum()[0];
-    //     m_b2_mcPy=mcp->getMomentum()[1];
-    //     m_b2_mcPz=mcp->getMomentum()[2];
-    //   }
+      if (m_processName == "HHbbbb") {
+        if(mcp->getPDG()==25 && m_H1_mcE<0) {
+          index_H1=mcp;
+          m_H1_mcPDGID=mcp->getPDG();
+          m_H1_mcE=mcp->getEnergy(); 
+          m_H1_mcPx=mcp->getMomentum()[0];
+          m_H1_mcPy=mcp->getMomentum()[1];
+          m_H1_mcPz=mcp->getMomentum()[2];
+        }
+        if(m_H2_mcE<0 && (mcp->getPDG()==25 && index_H1!=mcp )){ 
+          index_H2=mcp;
+          m_H2_mcPDGID=mcp->getPDG();
+          m_H2_mcE=mcp->getEnergy();
+          m_H2_mcPx=mcp->getMomentum()[0];
+          m_H2_mcPy=mcp->getMomentum()[1];
+          m_H2_mcPz=mcp->getMomentum()[2];
+        }
+        if(abs(mcp->getPDG())==5 && m_b1_mcE<0 && mcp->getParents()[0]==index_H1) {
+          m_b1_mcPDGID=mcp->getPDG();
+          m_b1_mcE=mcp->getEnergy();
+          m_b1_mcPx=mcp->getMomentum()[0];
+          m_b1_mcPy=mcp->getMomentum()[1];
+          m_b1_mcPz=mcp->getMomentum()[2];
+        }
+        if(m_b2_mcE<0 && (abs(mcp->getPDG())==5 && mcp->getPDG()==(-m_b1_mcPDGID)) && mcp->getParents()[0]==index_H1 ){
+          m_b2_mcPDGID=mcp->getPDG();
+          m_b2_mcE=mcp->getEnergy();
+          m_b2_mcPx=mcp->getMomentum()[0];
+          m_b2_mcPy=mcp->getMomentum()[1];
+          m_b2_mcPz=mcp->getMomentum()[2];
+        }
+        if(abs(mcp->getPDG())==5 && m_b3_mcE<0 && mcp->getParents()[0]==index_H2) {
+          m_b3_mcPDGID=mcp->getPDG();
+          m_b3_mcE=mcp->getEnergy();
+          m_b3_mcPx=mcp->getMomentum()[0];
+          m_b3_mcPy=mcp->getMomentum()[1];
+          m_b3_mcPz=mcp->getMomentum()[2];
+        }
+        if(m_b4_mcE<0 && (abs(mcp->getPDG())==5 && mcp->getPDG()==(-m_b3_mcPDGID))&& mcp->getParents()[0]==index_H2){
+          m_b4_mcPDGID=mcp->getPDG();
+          m_b4_mcE=mcp->getEnergy();
+          m_b4_mcPx=mcp->getMomentum()[0];
+          m_b4_mcPy=mcp->getMomentum()[1];
+          m_b4_mcPz=mcp->getMomentum()[2];
+        }
+      }
+      if (m_processName == "bb") {
+        if(mcp->getPDG()==4 ) { //&& mcp->getGeneratorStatus()==23 
+          m_b1_mcPDGID=mcp->getPDG();
+          m_b1_mcE=mcp->getEnergy();
+          m_b1_mcPx=mcp->getMomentum()[0];
+          m_b1_mcPy=mcp->getMomentum()[1];
+          m_b1_mcPz=mcp->getMomentum()[2];
+        }
+        if(mcp->getPDG()==-4  ){ //&& mcp->getGeneratorStatus()==23
+          m_b2_mcPDGID=mcp->getPDG();
+          m_b2_mcE=mcp->getEnergy();
+          m_b2_mcPx=mcp->getMomentum()[0];
+          m_b2_mcPy=mcp->getMomentum()[1];
+          m_b2_mcPz=mcp->getMomentum()[2];
+        }
+      }
 
-    //   if(abs(mcp->getPDG())==5 && m_b3_mcE<0 && mcp->getParents()[0]==index_H2) {
-    //     m_b3_mcPDGID=mcp->getPDG();
-    //     m_b3_mcE=mcp->getEnergy();
-    //     m_b3_mcPx=mcp->getMomentum()[0];
-    //     m_b3_mcPy=mcp->getMomentum()[1];
-    //     m_b3_mcPz=mcp->getMomentum()[2];
-    //   }
-    //   if(m_b4_mcE<0 && (abs(mcp->getPDG())==5 && mcp->getPDG()==(-m_b3_mcPDGID))&& mcp->getParents()[0]==index_H2){
-    //     m_b4_mcPDGID=mcp->getPDG();
-    //     m_b4_mcE=mcp->getEnergy();
-    //     m_b4_mcPx=mcp->getMomentum()[0];
-    //     m_b4_mcPy=mcp->getMomentum()[1];
-    //     m_b4_mcPz=mcp->getMomentum()[2];
-    //   }
-//#######################SAVE bb FOR DIJET####################
-/* 
-if(mcp->getPDG()==4 ) { //&& mcp->getGeneratorStatus()==23 
+//#######################SAVE bbbb FOR HH bkg####################
+      if (m_processName == "bbbb") {
+        if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000 ) {
+          index_H1=mcp; 
+          m_H1_mcE=mcp->getEnergy(); 
+          m_H1_mcPx=mcp->getMomentum()[0];
+          m_H1_mcPy=mcp->getMomentum()[1];
+          m_H1_mcPz=mcp->getMomentum()[2];
+        }
+        if(mcp->getPDG()==-13 && m_H2_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000  ) { 
+          index_H2=mcp; 
+          m_H2_mcPDGID=mcp->getPDG();
+          m_H2_mcE=mcp->getEnergy();
+          m_H2_mcPx=mcp->getMomentum()[0];
+          m_H2_mcPy=mcp->getMomentum()[1];
+          m_H2_mcPz=mcp->getMomentum()[2];
+        }
+        if(mcp->getPDG()==5 && m_b1_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2) ) { 
+          m_b1_mcPDGID=mcp->getPDG();
+          m_b1_mcE=mcp->getEnergy();
+          m_b1_mcPx=mcp->getMomentum()[0];
+          m_b1_mcPy=mcp->getMomentum()[1];
+          m_b1_mcPz=mcp->getMomentum()[2];
+          continue;
+        }
+        if(mcp->getPDG()==-5 && m_b2_mcE<0 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2) ) { 
+          m_b2_mcPDGID=mcp->getPDG();
+          m_b2_mcE=mcp->getEnergy();
+          m_b2_mcPx=mcp->getMomentum()[0];
+          m_b2_mcPy=mcp->getMomentum()[1];
+          m_b2_mcPz=mcp->getMomentum()[2];
+          continue;
+        }
+        if(mcp->getPDG()==5 && m_b3_mcE<0&& (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2)) { 
+            m_b3_mcPDGID=mcp->getPDG();
+            m_b3_mcE=mcp->getEnergy();
+            m_b3_mcPx=mcp->getMomentum()[0];
+            m_b3_mcPy=mcp->getMomentum()[1];
+            m_b3_mcPz=mcp->getMomentum()[2];
+            continue;
+        }
+        if(mcp->getPDG()==-5 && m_b4_mcE<0&& (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2) ) { 
+          m_b4_mcPDGID=mcp->getPDG();
+          m_b4_mcE=mcp->getEnergy();
+          m_b4_mcPx=mcp->getMomentum()[0];
+          m_b4_mcPy=mcp->getMomentum()[1];
+          m_b4_mcPz=mcp->getMomentum()[2];
+          continue;
+        }
+    }
+
+    if (m_processName == "bbH") {
+      if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000 ) { 
+        index_H1=mcp; 
+        m_H1_mcE=mcp->getEnergy(); 
+        m_H1_mcPx=mcp->getMomentum()[0];
+        m_H1_mcPy=mcp->getMomentum()[1];
+        m_H1_mcPz=mcp->getMomentum()[2];
+      }
+      if(mcp->getPDG()==25 && m_H2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000  ) {    
+        index_H2=mcp; 
+        m_H2_mcPDGID=mcp->getPDG();
+        m_H2_mcE=mcp->getEnergy();
+        m_H2_mcPx=mcp->getMomentum()[0];
+        m_H2_mcPy=mcp->getMomentum()[1];
+        m_H2_mcPz=mcp->getMomentum()[2];
+      }
+      if(mcp->getPDG()==5 && m_b1_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) ) { 
         m_b1_mcPDGID=mcp->getPDG();
         m_b1_mcE=mcp->getEnergy();
         m_b1_mcPx=mcp->getMomentum()[0];
         m_b1_mcPy=mcp->getMomentum()[1];
         m_b1_mcPz=mcp->getMomentum()[2];
+        continue;
       }
-      if(mcp->getPDG()==-4  ){ //&& mcp->getGeneratorStatus()==23
+      if(mcp->getPDG()==-5 && m_b2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) ) { 
         m_b2_mcPDGID=mcp->getPDG();
         m_b2_mcE=mcp->getEnergy();
         m_b2_mcPx=mcp->getMomentum()[0];
         m_b2_mcPy=mcp->getMomentum()[1];
         m_b2_mcPz=mcp->getMomentum()[2];
+        continue;
       }
-*/
-
-//#######################SAVE bbbb FOR HH bkg####################
-
-//  if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000 ) //&& mcp->getMomentum()[2]==1500
-//    { std::cout <<m_eventNumber<< std::endl;
-//         index_H1=mcp; 
-//         m_H1_mcE=mcp->getEnergy(); // m_H1_mcE non è più minore di 0, a m+1 anche se ho il secondo higgs, non entra in questo if e index_H1 resta pari a m
-//         m_H1_mcPx=mcp->getMomentum()[0];
-//         m_H1_mcPy=mcp->getMomentum()[1];
-//         m_H1_mcPz=mcp->getMomentum()[2];
-// 	}
-
-//  if(mcp->getPDG()==-13 && m_H2_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000  ) //&& mcp->getMomentum()[2]==1500
-//    {    
-//         index_H2=mcp; 
-//         m_H2_mcPDGID=mcp->getPDG();
-//         m_H2_mcE=mcp->getEnergy();
-//         m_H2_mcPx=mcp->getMomentum()[0];
-//         m_H2_mcPy=mcp->getMomentum()[1];
-//         m_H2_mcPz=mcp->getMomentum()[2];
-// 	}
-
-
-
-// if(mcp->getPDG()==5 && m_b1_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2) ) { //&& mcp->getGeneratorStatus()==23 
-
-//         m_b1_mcPDGID=mcp->getPDG();
-//         m_b1_mcE=mcp->getEnergy();
-//         m_b1_mcPx=mcp->getMomentum()[0];
-//         m_b1_mcPy=mcp->getMomentum()[1];
-//         m_b1_mcPz=mcp->getMomentum()[2];
-// continue;
-//       }
-//       if(mcp->getPDG()==-5 && m_b2_mcE<0 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2) ) { //&& mcp->getGeneratorStatus()==23
-//         m_b2_mcPDGID=mcp->getPDG();
-//         m_b2_mcE=mcp->getEnergy();
-//         m_b2_mcPx=mcp->getMomentum()[0];
-//         m_b2_mcPy=mcp->getMomentum()[1];
-//         m_b2_mcPz=mcp->getMomentum()[2];
-// continue;
-//       }
-
-//      if(mcp->getPDG()==5 && m_b3_mcE<0&& (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2)) { //&& mcp->getGeneratorStatus()==23 
-//         m_b3_mcPDGID=mcp->getPDG();
-//         m_b3_mcE=mcp->getEnergy();
-//         m_b3_mcPx=mcp->getMomentum()[0];
-//         m_b3_mcPy=mcp->getMomentum()[1];
-//         m_b3_mcPz=mcp->getMomentum()[2];
-// continue;
-//       }
-//       if(mcp->getPDG()==-5 && m_b4_mcE<0&& (mcp->getParents()[0]==index_H1 || mcp->getParents()[0]==index_H2) ){ //&& mcp->getGeneratorStatus()==23
-//         m_b4_mcPDGID=mcp->getPDG();
-//         m_b4_mcE=mcp->getEnergy();
-//         m_b4_mcPx=mcp->getMomentum()[0];
-//         m_b4_mcPy=mcp->getMomentum()[1];
-//         m_b4_mcPz=mcp->getMomentum()[2];
-// continue;
-//       }
-
-
-//#####################################SAVE bbH#####################################
-// if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==5000 ) //&& mcp->getMomentum()[2]==1500
-//    { std::cout <<m_eventNumber<< std::endl;
-//         index_H1=mcp; 
-//         m_H1_mcE=mcp->getEnergy(); // m_H1_mcE non è più minore di 0, a m+1 anche se ho il secondo higgs, non entra in questo if e index_H1 resta pari a m
-//         m_H1_mcPx=mcp->getMomentum()[0];
-//         m_H1_mcPy=mcp->getMomentum()[1];
-//         m_H1_mcPz=mcp->getMomentum()[2];
-// 	}
-
-//  if(mcp->getPDG()==25 && m_H2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000  ) //&& mcp->getMomentum()[2]==1500
-//    {    
-//         index_H2=mcp; 
-//         m_H2_mcPDGID=mcp->getPDG();
-//         m_H2_mcE=mcp->getEnergy();
-//         m_H2_mcPx=mcp->getMomentum()[0];
-//         m_H2_mcPy=mcp->getMomentum()[1];
-//         m_H2_mcPz=mcp->getMomentum()[2];
-// 	}
-
-
-
-// if(mcp->getPDG()==5 && m_b1_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) ) { //&& mcp->getGeneratorStatus()==23 
-
-//         m_b1_mcPDGID=mcp->getPDG();
-//         m_b1_mcE=mcp->getEnergy();
-//         m_b1_mcPx=mcp->getMomentum()[0];
-//         m_b1_mcPy=mcp->getMomentum()[1];
-//         m_b1_mcPz=mcp->getMomentum()[2];
-// 	std::cout << m_b1_mcPx << std::endl;
-// 	continue;
-//       }
-// if(mcp->getPDG()==-5 && m_b2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==5000 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) ) { //&& mcp->getGeneratorStatus()==23
-//         m_b2_mcPDGID=mcp->getPDG();
-//         m_b2_mcE=mcp->getEnergy();
-//         m_b2_mcPx=mcp->getMomentum()[0];
-//         m_b2_mcPy=mcp->getMomentum()[1];
-//         m_b2_mcPz=mcp->getMomentum()[2];
-//         std::cout << m_b2_mcPx << std::endl;
-
-// 	continue;
-//       }
-
-//      if(mcp->getPDG()==5 && m_b3_mcE<0&& (mcp->getParents()[0]==index_H2)) { //&& mcp->getGeneratorStatus()==23 
-//         m_b3_mcPDGID=mcp->getPDG();
-//         m_b3_mcE=mcp->getEnergy();
-//         m_b3_mcPx=mcp->getMomentum()[0];
-//         m_b3_mcPy=mcp->getMomentum()[1];
-//         m_b3_mcPz=mcp->getMomentum()[2];
-//         std::cout << m_b3_mcPx << std::endl;
-
-// 	continue;
-//       }
-//       if(mcp->getPDG()==-5 && m_b4_mcE<0&& (mcp->getParents()[0]==index_H2) ){ //&& mcp->getGeneratorStatus()==23
-//         m_b4_mcPDGID=mcp->getPDG();
-//         m_b4_mcE=mcp->getEnergy();
-//         m_b4_mcPx=mcp->getMomentum()[0];
-//         m_b4_mcPy=mcp->getMomentum()[1];
-//         m_b4_mcPz=mcp->getMomentum()[2];
-//         std::cout << m_b4_mcPx << std::endl;
-
-// 	continue;
-//       }
-
-
-//###########################################SAVE bc for light jets###################
-    /* if((abs(mcp->getPDG())==4 || abs(mcp->getPDG())==5) && mcp->getGeneratorStatus()==23 && first_filled==true) {
+      if(mcp->getPDG()==5 && m_b3_mcE<0&& (mcp->getParents()[0]==index_H2)) { //&& mcp->getGeneratorStatus()==23 
+        m_b3_mcPDGID=mcp->getPDG();
+        m_b3_mcE=mcp->getEnergy();
+        m_b3_mcPx=mcp->getMomentum()[0];
+        m_b3_mcPy=mcp->getMomentum()[1];
+        m_b3_mcPz=mcp->getMomentum()[2];
+        continue;
+      }
+      if(mcp->getPDG()==-5 && m_b4_mcE<0&& (mcp->getParents()[0]==index_H2) ){ //&& mcp->getGeneratorStatus()==23
+        m_b4_mcPDGID=mcp->getPDG();
+        m_b4_mcE=mcp->getEnergy();
+        m_b4_mcPx=mcp->getMomentum()[0];
+        m_b4_mcPy=mcp->getMomentum()[1];
+        m_b4_mcPz=mcp->getMomentum()[2];
+        continue;
+      }
+    }
+    if (m_processName == "bc") {
+      if((abs(mcp->getPDG())==4 || abs(mcp->getPDG())==5) && mcp->getGeneratorStatus()==23 && first_filled==true) {
         m_b1_mcPDGID=mcp->getPDG();
         m_b1_mcE=mcp->getEnergy();
         m_b1_mcPx=mcp->getMomentum()[0];
         m_b1_mcPy=mcp->getMomentum()[1];
         m_b1_mcPz=mcp->getMomentum()[2];
         first_filled=false;
-	continue;
+        continue;
       }
       if((abs(mcp->getPDG())==4 || abs(mcp->getPDG())==5) && mcp->getGeneratorStatus()==23 && first_filled==false ){
         m_b2_mcPDGID=mcp->getPDG();
@@ -736,151 +699,97 @@ if(mcp->getPDG()==4 ) { //&& mcp->getGeneratorStatus()==23
         m_b2_mcPy=mcp->getMomentum()[1];
         m_b2_mcPz=mcp->getMomentum()[2];
       }
-*/
-//###########################################
-//######################SAVE qqH ####################################################
-/*
- if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==1500 ) //&& mcp->getMomentum()[2]==1500
-   { std::cout <<m_eventNumber<< std::endl;
+    }
+
+    if (m_processName == "qqH") {
+      if(mcp->getPDG()==13 && m_H1_mcE<0 && mcp->getMomentum()[0]==0 && mcp->getMomentum()[1]==0 && abs(mcp->getMomentum()[2])==1500 ){ 
         index_H1=mcp; 
-        m_H1_mcE=mcp->getEnergy(); // m_H1_mcE non è più minore di 0, a m+1 anche se ho il secondo higgs, non entra in questo if e index_H1 resta pari a m
+        m_H1_mcE=mcp->getEnergy(); 
         m_H1_mcPx=mcp->getMomentum()[0];
         m_H1_mcPy=mcp->getMomentum()[1];
         m_H1_mcPz=mcp->getMomentum()[2];
-	}
-
- if(mcp->getPDG()==25 && m_H2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500  ) //&& mcp->getMomentum()[2]==1500
-   {    
+      }
+      if(mcp->getPDG()==25 && m_H2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500  ) {    
         index_H2=mcp; 
         m_H2_mcPDGID=mcp->getPDG();
         m_H2_mcE=mcp->getEnergy();
         m_H2_mcPx=mcp->getMomentum()[0];
         m_H2_mcPy=mcp->getMomentum()[1];
         m_H2_mcPz=mcp->getMomentum()[2];
-	}
-
-
-
-if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b1_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) ) { //&& mcp->getGeneratorStatus()==23 
+      }
+      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b1_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) ) { 
         index_b1=mcp;
         m_b1_mcPDGID=mcp->getPDG();
         m_b1_mcE=mcp->getEnergy();
         m_b1_mcPx=mcp->getMomentum()[0];
         m_b1_mcPy=mcp->getMomentum()[1];
         m_b1_mcPz=mcp->getMomentum()[2];
-	std::cout << m_b1_mcPx << std::endl;
-	continue;
+        continue;
       }
-if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) && mcp!=index_b1 ) { //&& mcp->getGeneratorStatus()==23
+      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b2_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) && mcp!=index_b1 ) { 
         m_b2_mcPDGID=mcp->getPDG();
         m_b2_mcE=mcp->getEnergy();
         m_b2_mcPx=mcp->getMomentum()[0];
         m_b2_mcPy=mcp->getMomentum()[1];
         m_b2_mcPz=mcp->getMomentum()[2];
-        std::cout << m_b2_mcPx << std::endl;
-
-	continue;
+        continue;
       }
-
-if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b5_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) && mcp!=index_b1 && mcp!=index_b2 ) { //&& mcp->getGeneratorStatus()==23 
+      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b5_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) && mcp!=index_b1 && mcp!=index_b2 ) { 
         index_b5=mcp;
         m_b5_mcPDGID=mcp->getPDG();
         m_b5_mcE=mcp->getEnergy();
         m_b5_mcPx=mcp->getMomentum()[0];
         m_b5_mcPy=mcp->getMomentum()[1];
         m_b5_mcPz=mcp->getMomentum()[2];
-	std::cout << m_b5_mcPx << std::endl;
-	continue;
+        continue;
       }
-if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b6_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) && mcp!=index_b1 && mcp!=index_b2 && mcp!=index_b5) { //&& mcp->getGeneratorStatus()==23
+      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b6_mcE<0 && mcp->getParents()[0]->getMomentum()[0]==0 && mcp->getParents()[0]->getMomentum()[1]==0 && abs(mcp->getParents()[0]->getMomentum()[2])==1500 && (mcp->getParents()[0]==index_H1 || mcp->getParents()[1]==index_H1) && mcp!=index_b1 && mcp!=index_b2 && mcp!=index_b5) { 
         m_b6_mcPDGID=mcp->getPDG();
         m_b6_mcE=mcp->getEnergy();
         m_b6_mcPx=mcp->getMomentum()[0];
         m_b6_mcPy=mcp->getMomentum()[1];
         m_b6_mcPz=mcp->getMomentum()[2];
-        std::cout << m_b6_mcPx << std::endl;
-
-	continue;
+        continue;
       }
-
-
-
-     if(mcp->getPDG()==5 && m_b3_mcE<0&& (mcp->getParents()[0]==index_H2)) { //&& mcp->getGeneratorStatus()==23 
-         index_b3=mcp;
-       m_b3_mcPDGID=mcp->getPDG();
+      if(mcp->getPDG()==5 && m_b3_mcE<0&& (mcp->getParents()[0]==index_H2)) {
+        index_b3=mcp;
+        m_b3_mcPDGID=mcp->getPDG();
         m_b3_mcE=mcp->getEnergy();
         m_b3_mcPx=mcp->getMomentum()[0];
         m_b3_mcPy=mcp->getMomentum()[1];
         m_b3_mcPz=mcp->getMomentum()[2];
-        std::cout << m_b3_mcPx << std::endl;
-
-	continue;
+        continue;
       }
-      if(mcp->getPDG()==-5 && m_b4_mcE<0&& (mcp->getParents()[0]==index_H2) ){ //&& mcp->getGeneratorStatus()==23
-         index_b4=mcp;
+      if(mcp->getPDG()==-5 && m_b4_mcE<0&& (mcp->getParents()[0]==index_H2) ){
+        index_b4=mcp;
         m_b4_mcPDGID=mcp->getPDG();
         m_b4_mcE=mcp->getEnergy();
         m_b4_mcPx=mcp->getMomentum()[0];
         m_b4_mcPy=mcp->getMomentum()[1];
         m_b4_mcPz=mcp->getMomentum()[2];
-        std::cout << m_b4_mcPx << std::endl;
-
-	continue;
+        continue;
       }
-
-
-     if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b7_mcE<0&& (mcp->getParents()[0]==index_H2) && mcp!= index_b3 && mcp!= index_b4 ) { //&& mcp->getGeneratorStatus()==23 
-         index_b7=mcp;
+      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b7_mcE<0&& (mcp->getParents()[0]==index_H2) && mcp!= index_b3 && mcp!= index_b4 ) {
+        index_b7=mcp;
         m_b7_mcPDGID=mcp->getPDG();
         m_b7_mcE=mcp->getEnergy();
         m_b7_mcPx=mcp->getMomentum()[0];
         m_b7_mcPy=mcp->getMomentum()[1];
         m_b7_mcPz=mcp->getMomentum()[2];
-        std::cout << m_b7_mcPx << std::endl;
-
-	continue;
+        continue;
       }
-      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b8_mcE<0&& (mcp->getParents()[0]==index_H2)&& mcp!= index_b3 && mcp!= index_b4 && mcp!=index_b7 ){ //&& mcp->getGeneratorStatus()==23
+      if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b8_mcE<0&& (mcp->getParents()[0]==index_H2)&& mcp!= index_b3 && mcp!= index_b4 && mcp!=index_b7 ){
         m_b8_mcPDGID=mcp->getPDG();
         m_b8_mcE=mcp->getEnergy();
         m_b8_mcPx=mcp->getMomentum()[0];
         m_b8_mcPy=mcp->getMomentum()[1];
         m_b8_mcPz=mcp->getMomentum()[2];
-        std::cout << m_b8_mcPx << std::endl;
-
-	continue;
+        continue;
       }
-*/
-
-
-
-
-
-
-
+    }
 
 //#######################SAVE qqqqlnu FOR HH bkg####################
-
-    // if(mcp->getPDG()==23 && m_H1_mcE<0) {
-    //     index_H1=mcp; //metto variabile H1 uguale all'indice corrente
-    //     m_H1_mcPDGID=mcp->getPDG();
-    //     m_H1_mcE=mcp->getEnergy(); // m_H1_mcE non è più minore di 0, a m+1 anche se ho il secondo higgs, non entra in questo if e index_H1 resta pari a m
-    //     m_H1_mcPx=mcp->getMomentum()[0];
-    //     m_H1_mcPy=mcp->getMomentum()[1];
-    //     m_H1_mcPz=mcp->getMomentum()[2];
-    //   }
-
-	
-    //   if(abs(mcp->getPDG())==24 && index_H1!=mcp){ 
-    //     index_H2=mcp; //metto variabile H2 uguale all'indice corrente
-    //     m_H2_mcPDGID=mcp->getPDG();
-    //     m_H2_mcE=mcp->getEnergy();
-    //     m_H2_mcPx=mcp->getMomentum()[0];
-    //     m_H2_mcPy=mcp->getMomentum()[1];
-    //     m_H2_mcPz=mcp->getMomentum()[2];
-    //   }
-
-    //  if((mcp->getPDG()==5||mcp->getPDG()==4||mcp->getPDG()==3||mcp->getPDG()==2||mcp->getPDG()==1) && m_b1_mcE<0 && mcp->getParents()[0]==index_H1) {
+    if (m_processName == "qqqqlnu") {
       if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) && m_b1_mcPDGID == -10) {
         index_b1=mcp;
         m_b1_mcPDGID=mcp->getPDG();
@@ -888,9 +797,7 @@ if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b6_mcE<0 && mcp->getParen
         m_b1_mcPx=mcp->getMomentum()[0];
         m_b1_mcPy=mcp->getMomentum()[1];
         m_b1_mcPz=mcp->getMomentum()[2];
-        std::cout << "b1: " << m_b1_mcPDGID << " " << m_b1_mcE << " " << m_b1_mcPx << " " << m_b1_mcPy << " " << m_b1_mcPz << std::endl;
       }
-      // if(m_b2_mcE<0 && (mcp->getPDG()==-5||mcp->getPDG()==-4||mcp->getPDG()==-3||mcp->getPDG()==-2||mcp->getPDG()==-1) && mcp->getPDG()==(-m_b1_mcPDGID) && mcp->getParents()[0]==index_H1 ){
       if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) &&
         mcp!=index_b1 && m_b2_mcPDGID == -10) {
           index_b2=mcp;
@@ -899,10 +806,7 @@ if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b6_mcE<0 && mcp->getParen
         m_b2_mcPx=mcp->getMomentum()[0];
         m_b2_mcPy=mcp->getMomentum()[1];
         m_b2_mcPz=mcp->getMomentum()[2];
-        std::cout << "b2: " << m_b2_mcPDGID << " " << m_b2_mcE << " " << m_b2_mcPx << " " << m_b2_mcPy << " " << m_b2_mcPz << std::endl;
       }
-
-      // if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) && m_b3_mcE<0 && mcp->getParents()[0]==index_H2) {
       if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) && 
         mcp!=index_b1 && mcp!=index_b2 && m_b3_mcPDGID == -10) {
         index_b3=mcp; 
@@ -911,9 +815,7 @@ if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b6_mcE<0 && mcp->getParen
         m_b3_mcPx=mcp->getMomentum()[0];
         m_b3_mcPy=mcp->getMomentum()[1];
         m_b3_mcPz=mcp->getMomentum()[2];
-        std::cout << "b3: " << m_b3_mcPDGID << " " << m_b3_mcE << " " << m_b3_mcPx << " " << m_b3_mcPy << " " << m_b3_mcPz << std::endl;
       }
-      // if(m_b4_mcE<0 && (abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) && (mcp->getPDG()!=m_b3_mcPDGID)&& mcp->getParents()[0]==index_H2){
       if (m_b3_mcE>0 && (abs(mcp->getPDG())==5||abs(mcp->getPDG())==4||abs(mcp->getPDG())==3||abs(mcp->getPDG())==2||abs(mcp->getPDG())==1) && 
         mcp!=index_b1 && mcp!=index_b2 && mcp!=index_b3 && m_b4_mcPDGID == -10) {
         index_b4=mcp;     
@@ -922,16 +824,8 @@ if((abs(mcp->getPDG())==5||abs(mcp->getPDG())==4) && m_b6_mcE<0 && mcp->getParen
         m_b4_mcPx=mcp->getMomentum()[0];
         m_b4_mcPy=mcp->getMomentum()[1];
         m_b4_mcPz=mcp->getMomentum()[2];
-        std::cout << "b4: " << m_b4_mcPDGID << " " << m_b4_mcE << " " << m_b4_mcPx << " " << m_b4_mcPy << " " << m_b4_mcPz << std::endl;
       }
-
-
-
-//###############################################################################################
-
-
-
-
+    }
 
       if(mcp->getGeneratorStatus()==1){//visible sum of stable particles --> take neutrinos out
         if(abs(mcp->getPDG())!=12 && abs(mcp->getPDG())!=14 && abs(mcp->getPDG())!=16){
