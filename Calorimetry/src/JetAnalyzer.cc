@@ -503,20 +503,22 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
         m_trueME_PDGID->push_back(mcp->getPDG());
       }
       //fill first quark anti quark pair which appears in the history
-    //this IS the hadronic W and Z (in case of a mixed di-boson event)
-      if(abs(mcp->getPDG())<7 && m_d1_mcE<0) {
-        m_d1_mcPDGID=mcp->getPDG();
-        m_d1_mcE=mcp->getEnergy();
-        m_d1_mcPx=mcp->getMomentum()[0];
-        m_d1_mcPy=mcp->getMomentum()[1];
-        m_d1_mcPz=mcp->getMomentum()[2];
-      }
-      if(m_d2_mcE<0 && (abs(mcp->getPDG())<7 && mcp->getPDG()==(-m_d1_mcPDGID))){
-        m_d2_mcPDGID=mcp->getPDG();
-        m_d2_mcE=mcp->getEnergy();
-        m_d2_mcPx=mcp->getMomentum()[0];
-        m_d2_mcPy=mcp->getMomentum()[1];
-        m_d2_mcPz=mcp->getMomentum()[2];
+      //this IS the hadronic W and Z (in case of a mixed di-boson event)
+      if (m_processName == "dijet") {
+        if(abs(mcp->getPDG())<7 && m_d1_mcE<0) {
+          m_d1_mcPDGID=mcp->getPDG();
+          m_d1_mcE=mcp->getEnergy();
+          m_d1_mcPx=mcp->getMomentum()[0];
+          m_d1_mcPy=mcp->getMomentum()[1];
+          m_d1_mcPz=mcp->getMomentum()[2];
+        }
+        if(m_d2_mcE<0 && (abs(mcp->getPDG())<7 && mcp->getPDG()==(-m_d1_mcPDGID))){
+          m_d2_mcPDGID=mcp->getPDG();
+          m_d2_mcE=mcp->getEnergy();
+          m_d2_mcPx=mcp->getMomentum()[0];
+          m_d2_mcPy=mcp->getMomentum()[1];
+          m_d2_mcPz=mcp->getMomentum()[2];
+        }
       }
 
       if (m_processName == "HHbbbb") {
@@ -566,56 +568,56 @@ void JetAnalyzer::processEvent( LCEvent* evt ) {
         }
       }
 
-      if (m_processName == "bb") {
-        if(mcp->getPDG()==5 ) {
-          m_b1_mcPDGID=mcp->getPDG();
-          m_b1_mcE=mcp->getEnergy();
-          m_b1_mcPx=mcp->getMomentum()[0];
-          m_b1_mcPy=mcp->getMomentum()[1];
-          m_b1_mcPz=mcp->getMomentum()[2];
-        }
-        if(mcp->getPDG()==-5  ){
-          m_b2_mcPDGID=mcp->getPDG();
-          m_b2_mcE=mcp->getEnergy();
-          m_b2_mcPx=mcp->getMomentum()[0];
-          m_b2_mcPy=mcp->getMomentum()[1];
-          m_b2_mcPz=mcp->getMomentum()[2];
-        }
-      }
+      // if (m_processName == "bb") {
+      //   if(mcp->getPDG()==5 ) {
+      //     m_b1_mcPDGID=mcp->getPDG();
+      //     m_b1_mcE=mcp->getEnergy();
+      //     m_b1_mcPx=mcp->getMomentum()[0];
+      //     m_b1_mcPy=mcp->getMomentum()[1];
+      //     m_b1_mcPz=mcp->getMomentum()[2];
+      //   }
+      //   if(mcp->getPDG()==-5  ){
+      //     m_b2_mcPDGID=mcp->getPDG();
+      //     m_b2_mcE=mcp->getEnergy();
+      //     m_b2_mcPx=mcp->getMomentum()[0];
+      //     m_b2_mcPy=mcp->getMomentum()[1];
+      //     m_b2_mcPz=mcp->getMomentum()[2];
+      //   }
+      // }
 
-      if (m_processName == "cc") {
-        if(mcp->getPDG()==4 ) {
-          m_b1_mcPDGID=mcp->getPDG();
-          m_b1_mcE=mcp->getEnergy();
-          m_b1_mcPx=mcp->getMomentum()[0];
-          m_b1_mcPy=mcp->getMomentum()[1];
-          m_b1_mcPz=mcp->getMomentum()[2];
-        }
-        if(mcp->getPDG()==-4  ){
-          m_b2_mcPDGID=mcp->getPDG();
-          m_b2_mcE=mcp->getEnergy();
-          m_b2_mcPx=mcp->getMomentum()[0];
-          m_b2_mcPy=mcp->getMomentum()[1];
-          m_b2_mcPz=mcp->getMomentum()[2];
-        }
-      }
+      // if (m_processName == "cc") {
+      //   if(mcp->getPDG()==4 ) {
+      //     m_b1_mcPDGID=mcp->getPDG();
+      //     m_b1_mcE=mcp->getEnergy();
+      //     m_b1_mcPx=mcp->getMomentum()[0];
+      //     m_b1_mcPy=mcp->getMomentum()[1];
+      //     m_b1_mcPz=mcp->getMomentum()[2];
+      //   }
+      //   if(mcp->getPDG()==-4  ){
+      //     m_b2_mcPDGID=mcp->getPDG();
+      //     m_b2_mcE=mcp->getEnergy();
+      //     m_b2_mcPx=mcp->getMomentum()[0];
+      //     m_b2_mcPy=mcp->getMomentum()[1];
+      //     m_b2_mcPz=mcp->getMomentum()[2];
+      //   }
+      // }
       
-      if (m_processName == "qq") {
-        if(abs(mcp->getPDG())==3 || abs(mcp->getPDG())==2 || abs(mcp->getPDG())==1) {
-          m_b1_mcPDGID=mcp->getPDG();
-          m_b1_mcE=mcp->getEnergy();
-          m_b1_mcPx=mcp->getMomentum()[0];
-          m_b1_mcPy=mcp->getMomentum()[1];
-          m_b1_mcPz=mcp->getMomentum()[2];
-        }
-        if(abs(mcp->getPDG())==3 || abs(mcp->getPDG())==2 || abs(mcp->getPDG())==1){
-          m_b2_mcPDGID=mcp->getPDG();
-          m_b2_mcE=mcp->getEnergy();
-          m_b2_mcPx=mcp->getMomentum()[0];
-          m_b2_mcPy=mcp->getMomentum()[1];
-          m_b2_mcPz=mcp->getMomentum()[2];
-        }
-      }
+      // if (m_processName == "qq") {
+      //   if(abs(mcp->getPDG())==3 || abs(mcp->getPDG())==2 || abs(mcp->getPDG())==1) {
+      //     m_b1_mcPDGID=mcp->getPDG();
+      //     m_b1_mcE=mcp->getEnergy();
+      //     m_b1_mcPx=mcp->getMomentum()[0];
+      //     m_b1_mcPy=mcp->getMomentum()[1];
+      //     m_b1_mcPz=mcp->getMomentum()[2];
+      //   }
+      //   if(abs(mcp->getPDG())==3 || abs(mcp->getPDG())==2 || abs(mcp->getPDG())==1){
+      //     m_b2_mcPDGID=mcp->getPDG();
+      //     m_b2_mcE=mcp->getEnergy();
+      //     m_b2_mcPx=mcp->getMomentum()[0];
+      //     m_b2_mcPy=mcp->getMomentum()[1];
+      //     m_b2_mcPz=mcp->getMomentum()[2];
+      //   }
+      // }
 
 
       if (m_processName == "bbbb") {
